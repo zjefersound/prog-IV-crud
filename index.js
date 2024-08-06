@@ -84,9 +84,9 @@ function renderCards() {
     item.className = "card-item";
     item.innerHTML = `
       <div>
-        <span>Número: ${c.cardNumber}</span>
-        <span>Validade: ${c.expirationDate}</span>
-        <span>CVV: ${c.securityCode}</span>
+        <span>Número: <span class="info">${c.cardNumber}</span></span>
+        <span>Validade: <span class="info">${c.expirationDate}</span></span>
+        <span>CVV: <span class="info">${c.securityCode}</span></span>
       </div>
       
       <button class="edit-btn" onclick="editCard('${c.id}')">

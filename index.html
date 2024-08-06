@@ -9,8 +9,8 @@
 </head>
 
 <body>
+  <img class="bg-image" src="https://t2.tudocdn.net/631730?w=1920" alt="">
   <main>
-    <img class="bg-image" src="https://t2.tudocdn.net/631730?w=1920" alt="">
     <div class="content">
       <h1>Gerenciador de cartões</h1>
       <p class="text">
@@ -20,20 +20,26 @@
         <h2>Adicionar cartão</h2>
 
         <div class="card">
+          <img
+            src="https://download.logo.wine/logo/Mastercard/Mastercard-Logo.wine.png"
+            alt="mastercard" class="card-flag-img">
+          <div class="card-title">cartão</div>
           <div class="form-control">
             <label for="cardNumber">Número do cartão</label>
             <input type="text" name="cardNumber" id="cardNumber" placeholder="000000000000" pattern="^\d{16}$"
               title="Card number must be 16 digits" required>
           </div>
-          <div class="form-control">
-            <label for="expirationDate">Data de validade</label>
-            <input type="text" name="expirationDate" id="expirationDate" placeholder="MM/AA"
-              pattern="^(0[1-9]|1[0-2])\/?([0-9]{2})$" title="Expiration date must be in MM/YY format" required>
-          </div>
-          <div class="form-control">
-            <label for="securityCode">CVV</label>
-            <input type="text" name="securityCode" id="securityCode" placeholder="000" pattern="^\d{3,4}$"
-              title="Security code must be 3 or 4 digits" required>
+          <div class="form-row">
+            <div class="form-control">
+              <label for="expirationDate">Data de validade</label>
+              <input type="text" name="expirationDate" id="expirationDate" placeholder="MM/AA"
+                pattern="^(0[1-9]|1[0-2])\/?([0-9]{2})$" title="Expiration date must be in MM/YY format" required>
+            </div>
+            <div class="form-control">
+              <label for="securityCode">CVV</label>
+              <input type="text" name="securityCode" id="securityCode" placeholder="000" pattern="^\d{3,4}$"
+                title="Security code must be 3 or 4 digits" required>
+            </div>
           </div>
         </div>
         <input type="hidden" name="cardId" id="cardId">
