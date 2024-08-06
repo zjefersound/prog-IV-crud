@@ -1,19 +1,101 @@
-const form = document.getElementById('cardForm');
-form.onsubmit = handleSubmit
+class CardStorage {
+  constructor() {
+    this.cards = [];
+  }
+  add({ cardNumber, expirationDate, securityCode }) {
+    this.cards.push({
+      id: String(Math.random()),
+      cardNumber,
+      expirationDate,
+      securityCode,
+    });
+  }
+  update(card) {
+    this.cards = this.cards.map((c) => {
+      if (card.id === c.id) {
+        return card;
+      }
+      return c;
+    });
+  }
+  delete(cardId) {
+    this.cards = this.cards.filter((c) => cardId !== c.id);
+  }
+  getById(cardId) {
+    return this.cards.find((c) => c.id === cardId);
+  }
+  getAll() {
+    return this.cards;
+  }
+}
+
+const storage = new CardStorage();
+renderCards();
+
+const form = document.getElementById("cardForm");
+form.onsubmit = handleSubmit;
 
 function handleSubmit(e) {
   e.preventDefault();
-  const cardNumberEl = document.getElementById('cardNumber');
-  const expirationDateEl = document.getElementById('expirationDate');
-  const securityCodeEl = document.getElementById('securityCode');
+  const cardId = document.getElementById("cardId");
+  const cardNumber = document.getElementById("cardNumber");
+  const expirationDate = document.getElementById("expirationDate");
+  const securityCode = document.getElementById("securityCode");
 
-  const cardNumber = cardNumberEl.value;
-  const expirationDate = expirationDateEl.value;
-  const securityCode = securityCodeEl.value;
+  if (cardId.value) {
+    storage.update({
+      id: cardId.value,
+      cardNumber: cardNumber.value,
+      expirationDate: expirationDate.value,
+      securityCode: securityCode.value,
+    });
+  } else {
+    storage.add({
+      cardNumber: cardNumber.value,
+      expirationDate: expirationDate.value,
+      securityCode: securityCode.value,
+    });
+  }
+  renderCards();
+  cardNumber.value = "";
+  expirationDate.value = "";
+  securityCode.value = "";
+}
 
-  console.log({
-    cardNumber,
-    expirationDate,
-    securityCode,
+function editCard(cardId) {
+  const card = storage.getById(cardId);
+  document.getElementById("cardId").value = card.id;
+  document.getElementById("cardNumber").value = card.cardNumber;
+  document.getElementById("expirationDate").value = card.expirationDate;
+  document.getElementById("securityCode").value = card.securityCode;
+}
+
+function deleteCard(cardId) {
+  storage.delete(cardId);
+  renderCards();
+}
+
+function renderCards() {
+  const listEl = document.getElementById("cards-list");
+  listEl.innerHTML = "";
+  const cards = storage.getAll();
+  cards.forEach((c) => {
+    const item = document.createElement("li");
+    item.className = "card-item";
+    item.innerHTML = `
+      <div>
+        <span>Número: ${c.cardNumber}</span>
+        <span>Validade: ${c.expirationDate}</span>
+        <span>CVV: ${c.securityCode}</span>
+      </div>
+      
+      <button class="edit-btn" onclick="editCard('${c.id}')">
+        Editar
+      </button>
+      <button class="delete-btn" onclick="deleteCard('${c.id}')">
+        Deletar
+      </button>
+    `;
+    listEl.appendChild(item);
   });
-} 
+}
