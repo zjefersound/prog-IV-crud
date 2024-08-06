@@ -26,18 +26,18 @@
           <div class="card-title">cartão</div>
           <div class="form-control">
             <label for="cardNumber">Número do cartão</label>
-            <input type="text" name="cardNumber" id="cardNumber" placeholder="0000000000000000" pattern="^\d{16}$"
+            <input type="text" name="cardNumber" id="cardNumber" placeholder="0000000000000000" pattern="^\d{16}$" maxlength="16"
               title="Card number must be 16 digits" required>
           </div>
           <div class="form-row">
             <div class="form-control">
               <label for="expirationDate">Data de validade</label>
               <input type="text" name="expirationDate" id="expirationDate" placeholder="MM/AA"
-                pattern="^(0[1-9]|1[0-2])\/?([0-9]{2})$" title="Expiration date must be in MM/YY format" required>
+                pattern="^(0[1-9]|1[0-2])\/?([0-9]{2})$" maxlength="5" title="Expiration date must be in MM/YY format" required>
             </div>
             <div class="form-control">
               <label for="securityCode">CVV</label>
-              <input type="text" name="securityCode" id="securityCode" placeholder="000" pattern="^\d{3,4}$"
+              <input type="text" name="securityCode" id="securityCode" placeholder="000" pattern="^\d{3,4}$" maxlength="4" minlength="3"
                 title="Security code must be 3 or 4 digits" required>
             </div>
           </div>
