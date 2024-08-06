@@ -29,7 +29,7 @@ class CardStorage {
   }
 }
 
-const storage = new CardStorage();
+const cardStorage = new CardStorage();
 renderCards();
 
 const form = document.getElementById("cardForm");
@@ -43,14 +43,14 @@ function handleSubmit(e) {
   const securityCode = document.getElementById("securityCode");
 
   if (cardId.value) {
-    storage.update({
+    cardStorage.update({
       id: cardId.value,
       cardNumber: cardNumber.value,
       expirationDate: expirationDate.value,
       securityCode: securityCode.value,
     });
   } else {
-    storage.add({
+    cardStorage.add({
       cardNumber: cardNumber.value,
       expirationDate: expirationDate.value,
       securityCode: securityCode.value,
@@ -63,7 +63,7 @@ function handleSubmit(e) {
 }
 
 function editCard(cardId) {
-  const card = storage.getById(cardId);
+  const card = cardStorage.getById(cardId);
   document.getElementById("cardId").value = card.id;
   document.getElementById("cardNumber").value = card.cardNumber;
   document.getElementById("expirationDate").value = card.expirationDate;
@@ -71,14 +71,14 @@ function editCard(cardId) {
 }
 
 function deleteCard(cardId) {
-  storage.delete(cardId);
+  cardStorage.delete(cardId);
   renderCards();
 }
 
 function renderCards() {
   const listEl = document.getElementById("cards-list");
   listEl.innerHTML = "";
-  const cards = storage.getAll();
+  const cards = cardStorage.getAll();
   cards.forEach((c) => {
     const item = document.createElement("li");
     item.className = "card-item";
